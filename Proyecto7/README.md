@@ -52,74 +52,9 @@ La instalación se realiza desde el equipo local mediante una conexión **SSH** 
 ssh ubuntu@<IP_del_servidor>
 ```
 
----
+### Fase 1: Stack LAMP + Bacula
 
-### Fase 1: Instalación de Webmin 2.111
-
-Para facilitar la administración del servidor, se instala **Webmin 2.111**, un panel web de gestión del sistema. Los pasos realizados son los siguientes:
-
-**1. Moverse a un directorio con permisos de escritura:**
-
-```bash
-cd /tmp
-```
-
-**2. Descargar el paquete oficial desde GitHub Releases:**
-
-```bash
-# Versión estable 2.111 compatible con Ubuntu 24.04 (Noble)
-wget https://github.com/webmin/webmin/releases/download/2.111/webmin_2.111_all.deb
-```
-
-> *Explicación:* Descarga directa del repositorio oficial. Se evitan repositorios obsoletos como `sarge`, incompatibles con Ubuntu 24.04.
-
-**3. Instalar el paquete `.deb`:**
-
-```bash
-# Puede fallar por dependencias no resueltas en este punto
-sudo dpkg -i webmin_2.111_all.deb
-```
-
-> *Explicación:* `dpkg` instala el `.deb` directamente pero no resuelve dependencias automáticamente, a diferencia de `apt`.
-
-**4. Resolver dependencias automáticamente:**
-
-```bash
-sudo apt update
-sudo apt install -f
-```
-
-> *Explicación:* `apt install -f` (*fix-broken*) detecta e instala todas las dependencias faltantes del paso anterior: `libauthen-pam-perl`, `libnet-ssleay-perl`, `libio-pty-perl`.
-
-**5. Instalar dependencias adicionales específicas de Webmin:**
-
-```bash
-sudo apt install libauthen-pam-perl libio-pty-perl libnet-ssleay-perl apt-show-versions
-```
-
-> *Explicación:* `apt-show-versions` es necesario para que Webmin pueda mostrar versiones de paquetes instalados en el sistema.
-
-**6. Establecer contraseña del usuario root:**
-
-```bash
-sudo passwd root
-```
-
-> *Explicación:* Webmin requiere autenticación como root. Ubuntu deshabilita el usuario root por defecto, por lo que se debe establecer su contraseña manualmente antes de acceder a la interfaz web.
-
-Una vez completada la instalación, Webmin estará accesible desde el navegador en:
-
-```
-https://<IP_del_servidor>:10000
-```
-
-![Imagen1](img/1.png)
-
----
-
-### Fase 2: Stack LAMP + Bacula
-
-**7. Instalar stack LAMP**
+**Instalar stack LAMP**
 
 ```bash
 sudo apt install apache2 mysql-server mysql-client php php-mysql -y
@@ -127,7 +62,7 @@ sudo apt install apache2 mysql-server mysql-client php php-mysql -y
 
 > *Explicación:* Apache y PHP son necesarios para servir la interfaz web de Baculum. MySQL actúa como catálogo donde Bacula almacena el historial de jobs y volúmenes.
 
-**8. Instalar paquetes Bacula Community completos:**
+**Instalar paquetes Bacula Community completos:**
 
 ```bash
 sudo apt install bacula bacula-client bacula-common-mysql bacula-director-mysql bacula-server -y
@@ -139,7 +74,7 @@ sudo apt install bacula bacula-client bacula-common-mysql bacula-director-mysql 
 > - **bacula-client**: se ejecuta en cada cliente para enviar los datos al director.
 > - **bacula-common-mysql**: librería de integración con MySQL para el catálogo.
 
-### Fase 3: Configuración de Bacula
+### Fase 2: Configuración de Bacula
 
 ### Configuración del servidor Ubuntu
 
