@@ -14,7 +14,7 @@ SSL Labs otorga la validez y puntuación a un certificado y servidor basándose 
 
 ---
 
-### 1. Certificado (Certificate)
+### 1. Certificado
 
 El certificado es válido por los siguientes motivos:
 
@@ -23,12 +23,11 @@ El certificado es válido por los siguientes motivos:
 - **Dentro del período de validez:** Emitido el 16 de abril de 2026 y válido hasta el 15 de julio de 2026, por lo que en la fecha del análisis estaba completamente vigente.
 - **Nombre del dominio coincidente:** El CN y el nombre alternativo (SAN) son ambos `abel-servidor.duckdns.org`, que coincide exactamente con el dominio analizado.
 - **Certificate Transparency:** El certificado está registrado en los logs públicos de transparencia de certificados (CT), lo que permite detectar emisiones fraudulentas y es un requisito de los navegadores modernos.
-- **Clave no débil:** La clave EC de 256 bits no corresponde a ninguna clave débil conocida (Debian weak key: No).
-- **Cadena de certificados completa y sin errores:** Se proporcionan 2 certificados en la cadena (el propio y el intermedio E8) sin problemas detectados (*Chain issues: None*).
-
+- **Clave no débil:** La clave EC de 256 bits no corresponde a ninguna clave débil conocida.
+- **Cadena de certificados completa y sin errores:** Se proporcionan 2 certificados en la cadena (el propio y el intermedio E8) sin problemas detectados.
 ---
 
-### 2. Soporte de Protocolos (Protocol Support)
+### 2. Soporte de Protocolos
 
 El servidor tiene una configuración de protocolos muy segura:
 
@@ -39,15 +38,15 @@ Esto garantiza que solo se acepten conexiones con versiones del protocolo que no
 
 ---
 
-### 3. Intercambio de Claves (Key Exchange)
+### 3. Intercambio de Claves
 
 - Se utiliza **ECDH (Elliptic Curve Diffie-Hellman)** con curvas x25519 y secp521r1, que son consideradas seguras y eficientes.
 - Todas las suites de cifrado soportadas implementan **Forward Secrecy (FS)**, lo que significa que aunque la clave privada del servidor fuese comprometida en el futuro, las sesiones pasadas no podrían ser descifradas.
-- La fortaleza equivalente del intercambio de claves es de 3072 bits RSA (para TLS 1.3) o hasta 15360 bits RSA (para TLS 1.2 con secp521r1), muy por encima del mínimo recomendado.
+- La fortaleza equivalente del intercambio de claves es de 3072 bits RSA o hasta 15360 bits RSA, muy por encima del mínimo recomendado.
 
 ---
 
-### 4. Fortaleza del Cifrado (Cipher Strength)
+### 4. Fortaleza del Cifrado
 
 Las suites de cifrado soportadas son:
 
