@@ -8,7 +8,7 @@
 
 ---
 
-## ¿Por qué el certificado es considerado válido?
+## ¿Por qué el certificado es válido?
 
 SSL Labs otorga la validez y puntuación a un certificado y servidor basándose en cuatro categorías. A continuación se explica cada una con los datos del análisis.
 
